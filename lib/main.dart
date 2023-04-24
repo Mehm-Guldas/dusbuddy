@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:dusbuddy2/Pages/AboutPage.dart';
 
 void main() => runApp(MaterialApp(
-  home: Home(),
+  initialRoute: '/',
+  routes: {
+    '/': (context) => Home(),
+    '/about': (context) => About(),
+  },
 ));
 
 
@@ -75,9 +80,7 @@ class NavigationDrawer extends StatelessWidget {
     ),
   );
 
-  Widget buildHeader(BuildContext context) => Container(
-
-  );
+  Widget buildHeader(BuildContext context) => Container();
 
   Widget buildMenuItems(BuildContext context) => Container(
     padding: const EdgeInsets.all(24),
@@ -107,7 +110,9 @@ class NavigationDrawer extends StatelessWidget {
         ),
         ListTile(
           title: const Text('Hakkında'),
-          onTap: (){},
+          onTap: (){
+            Navigator.pushNamed(context, '/about');
+          },
         ),
       ],
     ),
