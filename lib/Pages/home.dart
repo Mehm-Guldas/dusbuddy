@@ -1,8 +1,20 @@
 import 'package:flutter/material.dart';
 
-
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  int currentIndex = 0;
+  final screens = [
+    Center(child: Text('Takvim', style: TextStyle(fontSize: 50))),
+    Center(child: Text('Kişisel', style: TextStyle(fontSize: 50))),
+    Center(child: Text('Araçlar', style: TextStyle(fontSize: 50))),
+  ];
+
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +34,13 @@ class Home extends StatelessWidget {
       ),
       drawer: const NavigationDrawer(),// Sidebar
       bottomNavigationBar: BottomNavigationBar(
+          //uncomment if you want footer navbar labels shown
+          // showSelectedLabels: false,
+          // showUnselectedLabels: false,
+          currentIndex: currentIndex,
+          onTap: (index) => setState(()=> currentIndex = index),
           selectedFontSize: 12,
-          items: [
+          items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.timer),
               label: 'Takvim',
@@ -44,13 +61,15 @@ class Home extends StatelessWidget {
 
           ]
       ),
-      body: const Center(
-        child: Text('Home Page'),
-      ),
+      body: screens[currentIndex],
 
     );
   }
 }
+
+
+
+// SideBar <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 class NavigationDrawer extends StatelessWidget {
   const NavigationDrawer({Key? key}) : super(key: key);
 
@@ -76,7 +95,9 @@ class NavigationDrawer extends StatelessWidget {
       children: [
         ListTile(
           title: const Text('Sınav Sistemi'),
-          onTap: (){},
+          onTap: (){
+            Navigator.pushNamed(context, '/examinfo');
+          },
         ),
         ListTile(
           title: const Text('Puan Türü Tablosu'),
@@ -88,14 +109,15 @@ class NavigationDrawer extends StatelessWidget {
         ),
         ListTile(
           title: const Text('Haber Sayfası'),
-          onTap: (){},
+          onTap: (){
+
+          },
         ),
         const Divider(color: Colors.black54),
         ListTile(
           title: const Text('Ayarlar'),
           onTap: (){
             Navigator.pushNamed(context, '/settings');
-
           },
         ),
         ListTile(
