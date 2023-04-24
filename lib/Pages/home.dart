@@ -93,7 +93,10 @@ class NavigationDrawer extends StatelessWidget {
         const Divider(color: Colors.black54),
         ListTile(
           title: const Text('Ayarlar'),
-          onTap: (){},
+          onTap: (){
+            Navigator.pushNamed(context, '/settings');
+
+          },
         ),
         ListTile(
           title: const Text('Hakkında'),
