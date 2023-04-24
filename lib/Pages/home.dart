@@ -10,8 +10,11 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   int currentIndex = 0;
   final screens = [
+    //First Body
     Center(child: Text('Takvim', style: TextStyle(fontSize: 50))),
+    //Second Body
     Center(child: Text('Kişisel', style: TextStyle(fontSize: 50))),
+    //Third Body
     Center(child: Text('Araçlar', style: TextStyle(fontSize: 50))),
   ];
 
