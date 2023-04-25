@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:dusbuddy2/Menubodies/personalbody.dart';
+import 'package:dusbuddy2/Menubodies/toolsbody.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -10,12 +12,14 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   int currentIndex = 0;
   final screens = [
-    //First Body
+    //First Body Takvim Page <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     Center(child: Text('Takvim', style: TextStyle(fontSize: 50))),
-    //Second Body
-    Center(child: Text('Kişisel', style: TextStyle(fontSize: 50))),
-    //Third Body
-    Center(child: Text('Araçlar', style: TextStyle(fontSize: 50))),
+
+    //Second Body Kisisel Page <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    KisiselPageBody(),
+
+    //Third Body Araclar Page <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    AraclarPageBody(),
   ];
 
 
@@ -69,6 +73,8 @@ class _HomeState extends State<Home> {
     );
   }
 }
+
+
 
 
 
