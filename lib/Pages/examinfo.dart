@@ -19,8 +19,18 @@ class Examinfo extends StatelessWidget {
         centerTitle: true,
         backgroundColor: Colors.white,
       ),
-      body: const Center(
-        child: Text('Sinav Sistemi'),
+      body: Center(
+        child: Container(
+          margin: EdgeInsets.all(32),
+          decoration: BoxDecoration(
+              border: Border.all(
+                color: Colors.black54,
+                width: 4,
+            ),
+              borderRadius: BorderRadius.all(Radius.circular(25))
+          ),
+        ),
+
       ),
 
     );
