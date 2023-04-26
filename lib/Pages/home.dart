@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dusbuddy2/Menubodies/personalbody.dart';
 import 'package:dusbuddy2/Menubodies/toolsbody.dart';
-import 'package:url_launcher/url_launcher.dart';
-
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -111,20 +109,18 @@ class NavigationDrawer extends StatelessWidget {
           },
         ),
         ListTile(
-          title: Text('Puan Türü Tablosu'),
-          onTap: () {},
+          title: const Text('Puan Türü Tablosu'),
+          onTap: (){},
         ),
         ListTile(
           title: const Text('Soru Kitapçığı'),
           onTap: (){},
         ),
-        const ListTile(
-          title: Text('Haber Sayfası'),
-          onTap: Launchhaberler,
-        ),
-        const ListTile(
-          title: Text('Kılavuzlar'),
-          onTap: Launchkilavuzlar,
+        ListTile(
+          title: const Text('Haber Sayfası'),
+          onTap: (){
+
+          },
         ),
         const Divider(color: Colors.black54),
         ListTile(
@@ -144,28 +140,3 @@ class NavigationDrawer extends StatelessWidget {
 
   );
 }
-
-
-
-Launchhaberler() async {
-  const url = 'https://www.osym.gov.tr/TR,22583/2022.html';
-  final uri = Uri.parse(url);
-  if (await canLaunchUrl(uri)) {
-    await launchUrl(uri);
-  } else {
-    throw 'Could not launch $url';
-  }
-}
-
-
-Launchkilavuzlar() async {
-  const url = 'https://www.osym.gov.tr/TR,23929/2022.html';
-  final uri = Uri.parse(url);
-  if (await canLaunchUrl(uri)) {
-    await launchUrl(uri);
-  } else {
-    throw 'Could not launch $url';
-  }
-}
-
-
