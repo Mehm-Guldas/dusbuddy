@@ -1,6 +1,7 @@
 # dusbuddy2
 
 A new Flutter project.
+Dart/Flutter ile Osym-DUS sınavı için sınav takip asistani
 
 ## Getting Started
 
