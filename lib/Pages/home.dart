@@ -3,6 +3,8 @@ import 'package:dusbuddy2/Menubodies/personalbody.dart';
 import 'package:dusbuddy2/Menubodies/toolsbody.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../Menubodies/chronometer_screen.dart';
+
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -15,8 +17,7 @@ class _HomeState extends State<Home> {
   int currentIndex = 0;
   final screens = [
     //First Body Takvim Page <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-    Center(child: Text('Takvim', style: TextStyle(fontSize: 50))),
-
+    ChronometerScreen(),
     //Second Body Kisisel Page <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     KisiselPageBody(),
 
