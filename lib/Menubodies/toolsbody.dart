@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import '../Pages/netHesaplama.dart';
-
+//dfg
 class AraclarPageBody extends StatelessWidget {
   const AraclarPageBody({
     super.key,
+
   });
 
   @override
