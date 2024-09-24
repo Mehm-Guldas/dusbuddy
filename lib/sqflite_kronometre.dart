@@ -27,6 +27,9 @@ class ChronometerDatabase {
 
   // Kaydedilen verileri alma
   Future<List<Map<String, dynamic>>> getChronometers() async {
-    return await _database?.query('chronometers') ?? [];
+    List<Map<String, dynamic>> chronometers = await _database?.query('chronometers') ?? [];
+    print("Veritabanından çekilen veriler: $chronometers");  // Verileri konsolda yazdır
+    return chronometers;
   }
+
 }

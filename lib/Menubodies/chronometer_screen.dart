@@ -1,8 +1,7 @@
 import 'dart:async';
-
-import 'package:dusbuddy2/sqflite.dart';
+import 'package:dusbuddy2/sqflite_kronometre.dart';
 import 'package:flutter/material.dart';
-import 'package:sqflite/sqflite.dart';
+import '../sqflite_kronometre.dart';
 import 'package:intl/intl.dart'; // Tarih formatlama için
 
 class ChronometerScreen extends StatefulWidget {
@@ -25,8 +24,19 @@ class _ChronometerScreenState extends State<ChronometerScreen> {
   void initState() {
     super.initState();
     db = ChronometerDatabase();
-    db.openDb();
+    db.openDb().then((_) {
+      _loadChronometers(); // Veritabanından kayıtları yükle
+    });
     _formattedTime = _formatTime(_duration);
+  }
+
+  // Veritabanından kronometre kayıtlarını yükleme
+  Future<void> _loadChronometers() async {
+    List<Map<String, dynamic>> chronometers = await db.getChronometers();
+    print("Yüklenen veriler: $chronometers");  // Konsolda yazdır
+    setState(() {
+      _chronometerList = chronometers;  // Veritabanından gelen verileri listeye ekle
+    });
   }
 
   // Zamanı formatlama
@@ -69,18 +79,20 @@ class _ChronometerScreenState extends State<ChronometerScreen> {
   }
 
   // Süreyi veritabanına kaydetme
-  void _saveChronometer() {
-    String name = _nameController.text;
-    String date = DateFormat('yyyy-MM-dd – kk:mm').format(DateTime.now());
+  Future<void> _saveChronometer() async {
+    try {
+      String name = _nameController.text;
+      String date = DateFormat('yyyy-MM-dd – kk:mm').format(DateTime.now());
 
-    db.insertChronometer(name, _duration.inSeconds, date);
-    _chronometerList.add({'name': name, 'duration': _duration.inSeconds, 'date': date}); // Listeye ekle
+      await db.insertChronometer(name, _duration.inSeconds, date);
+      await _loadChronometers(); // Veriyi güncelledikten sonra ekrana yansıtmak için listeyi yükle
 
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text("Kronometre kaydedildi!")),
-    );
-
-    setState(() {}); // Listeyi güncelle
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Kronometre kaydedildi!")),
+      );
+    } catch (e) {
+      print("Hata oluştu: $e"); // Hata mesajını konsola yazdır
+    }
   }
 
   @override
@@ -138,7 +150,9 @@ class _ChronometerScreenState extends State<ChronometerScreen> {
             SizedBox(height: 20),
             // Kayıtları gösteren liste
             Expanded(
-              child: ListView.builder(
+              child: _chronometerList.isEmpty
+                  ? Center(child: Text('Kayıtlı veri bulunmuyor'))
+                  : ListView.builder(
                 itemCount: _chronometerList.length,
                 itemBuilder: (context, index) {
                   final chronometer = _chronometerList[index];
@@ -146,7 +160,8 @@ class _ChronometerScreenState extends State<ChronometerScreen> {
                     margin: EdgeInsets.symmetric(vertical: 8.0),
                     child: ListTile(
                       title: Text(chronometer['name']),
-                      subtitle: Text('Süre: ${_formatTime(Duration(seconds: chronometer['duration']))} - ${chronometer['date']}'),
+                      subtitle: Text(
+                          'Süre: ${_formatTime(Duration(seconds: chronometer['duration']))} - ${chronometer['date']}'),
                     ),
                   );
                 },

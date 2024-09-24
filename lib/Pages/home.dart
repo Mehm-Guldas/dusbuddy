@@ -53,7 +53,7 @@ class _HomeState extends State<Home> {
           items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.timer),
-              label: 'Takvim',
+              label: 'Kronometre',
               backgroundColor: Colors.white70,
 
             ),
@@ -149,7 +149,7 @@ class NavigationDrawer extends StatelessWidget {
 
 
 Launchhaberler() async {
-  const url = 'https://www.osym.gov.tr/TR,22583/2022.html';
+  const url = 'https://www.osym.gov.tr/TR,8872/hakkinda.html';
   final uri = Uri.parse(url);
   if (await canLaunchUrl(uri)) {
     await launchUrl(uri);
@@ -160,7 +160,7 @@ Launchhaberler() async {
 
 
 Launchkilavuzlar() async {
-  const url = 'https://www.osym.gov.tr/TR,23929/2022.html';
+  const url = 'https://www.osym.gov.tr/TR,8872/hakkinda.html';
   final uri = Uri.parse(url);
   if (await canLaunchUrl(uri)) {
     await launchUrl(uri);

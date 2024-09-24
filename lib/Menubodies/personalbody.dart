@@ -82,7 +82,7 @@ class KisiselPageBody extends StatelessWidget {
                       width: 200,
                     ),
                     SizedBox(height: 6,),
-                    const Text('Programlarım',
+                    const Text('Sonuçlarım',
                       style: TextStyle(fontSize: 24, color: Colors.black87),
                     )
                   ],
