@@ -4,6 +4,7 @@ import 'package:path/path.dart';
 
 class DatabaseHelper {
   static final DatabaseHelper _instance = DatabaseHelper._internal();
+
   factory DatabaseHelper() => _instance;
   static Database? _database;
 
@@ -30,6 +31,7 @@ class DatabaseHelper {
 
   Future<void> insertSonuc(String tarih, double temelNet, double klinikNet) async {
     final db = await database;
+    print('Sonuç kaydediliyor: Tarih: $tarih, TemelNet: $temelNet, KlinikNet: $klinikNet'); // Hata ayıklama
     await db.insert(
       'sonuclar',
       {'tarih': tarih, 'temel_net': temelNet, 'klinik_net': klinikNet},
@@ -52,5 +54,6 @@ class DatabaseHelper {
       whereArgs: [id],
     );
   }
+}
 
 

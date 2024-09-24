@@ -53,10 +53,12 @@ class _NetHesaplamaState extends State<NetHesaplama> {
 
   Future<void> loadSonuclar() async {
     final sonucList = await DatabaseHelper().getSonuclar();
+    print('Veritabanından gelen sonuçlar: $sonucList'); // Verilerin geldiğini kontrol et
     setState(() {
       sonuclarim = sonucList;
     });
   }
+
 
   Future<void> silSonuc(int id) async {
     await DatabaseHelper().deleteSonuc(id);
@@ -197,20 +199,24 @@ class _NetHesaplamaState extends State<NetHesaplama> {
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             Expanded(
-              child: ListView.builder(
+              child: sonuclarim.isNotEmpty
+                  ? ListView.builder(
                 itemCount: sonuclarim.length,
                 itemBuilder: (context, index) {
                   final sonuc = sonuclarim[index];
                   return ListTile(
-                    title: Text('Tarih: ${sonuc['tarih']}, TBT: ${sonuc['temel_net']}, KBT: ${sonuc['klinik_net']}'),
+                    title: Text(
+                        'Tarih: ${sonuc['tarih']}, TBT: ${sonuc['temel_net']}, KBT: ${sonuc['klinik_net']}'),
                     trailing: IconButton(
                       icon: Icon(Icons.delete),
                       onPressed: () => silSonuc(sonuc['id']),
                     ),
                   );
                 },
-              ),
+              )
+                  : Center(child: Text('Kayıtlı sonuç bulunmamaktadır.')),
             ),
+
           ],
         ),
       ),
