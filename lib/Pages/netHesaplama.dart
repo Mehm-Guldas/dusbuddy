@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../sqfliteNet.dart';
+import '../Database/sqfliteNet.dart';
 
 void main() {
   runApp(MyApp());

@@ -1,7 +1,7 @@
 import 'dart:async';
-import 'package:dusbuddy2/sqflite_kronometre.dart';
+import 'package:dusbuddy2/Database/sqflite_kronometre.dart';
 import 'package:flutter/material.dart';
-import '../sqflite_kronometre.dart';
+import '../Database/sqflite_kronometre.dart';
 import 'package:intl/intl.dart'; // Tarih formatlama için
 
 class ChronometerScreen extends StatefulWidget {

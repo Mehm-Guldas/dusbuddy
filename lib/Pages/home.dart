@@ -3,7 +3,7 @@ import 'package:dusbuddy2/Menubodies/personalbody.dart';
 import 'package:dusbuddy2/Menubodies/toolsbody.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../Menubodies/chronometer_screen.dart';
+import 'chronometer_screen.dart';
 
 
 class Home extends StatefulWidget {
