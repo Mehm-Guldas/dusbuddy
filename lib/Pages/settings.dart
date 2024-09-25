@@ -22,7 +22,7 @@ class Settings extends StatelessWidget {
       body: const Center(
         child: Text('Ayarlar'),
       ),
-
+    // Test branch commit
     );
   }
 }
