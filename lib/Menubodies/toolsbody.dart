@@ -27,11 +27,11 @@ class AraclarPageBody extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Ink.image(
-                    image: NetworkImage('assets/books.png'),
+                    image: const NetworkImage('assets/clipboard.png'),
                     height: 200,
                     width: 200,
                   ),
-                  SizedBox(height: 6),
+                  const SizedBox(height: 6),
                   const Text(
                     'Net Hesaplama',
                     style: TextStyle(fontSize: 24, color: Colors.black87),
@@ -45,13 +45,13 @@ class AraclarPageBody extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Ink.image(
-                    image: NetworkImage('assets/progress.png'),
+                    image: const NetworkImage('assets/schedule.png'),
                     height: 200,
                     width: 200,
                   ),
-                  SizedBox(height: 6),
+                  const SizedBox(height: 6),
                   const Text(
-                    'Ajanda',
+                    'Takvim',
                     style: TextStyle(fontSize: 24, color: Colors.black87),
                   ),
                 ],
@@ -68,13 +68,13 @@ class AraclarPageBody extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Ink.image(
-                    image: NetworkImage('assets/books.png'),
+                    image: const NetworkImage('assets/newspaper.png'),
                     height: 200,
                     width: 200,
                   ),
-                  SizedBox(height: 6),
+                  const SizedBox(height: 6),
                   const Text(
-                    'DUS Sayfası',
+                    'Haberler',
                     style: TextStyle(fontSize: 24, color: Colors.black87),
                   ),
                 ],
@@ -86,11 +86,11 @@ class AraclarPageBody extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Ink.image(
-                    image: NetworkImage('assets/progress.png'),
+                    image: const NetworkImage('assets/progress.png'),
                     height: 200,
                     width: 200,
                   ),
-                  SizedBox(height: 6),
+                  const SizedBox(height: 6),
                   const Text(
                     'Haberler',
                     style: TextStyle(fontSize: 24, color: Colors.black87),
