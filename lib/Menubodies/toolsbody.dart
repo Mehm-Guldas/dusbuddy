@@ -1,10 +1,10 @@
+import 'package:dusbuddy2/Pages/CalendarPage.dart';
 import 'package:flutter/material.dart';
 import '../Pages/netHesaplama.dart';
-//dfg
+
 class AraclarPageBody extends StatelessWidget {
   const AraclarPageBody({
     super.key,
-
   });
 
   @override
@@ -39,8 +39,14 @@ class AraclarPageBody extends StatelessWidget {
                 ],
               ),
             ),
+            // Güncellenmiş Takvim InkWell yapısı
             InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => CalendarPage()),
+                );
+              },
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
