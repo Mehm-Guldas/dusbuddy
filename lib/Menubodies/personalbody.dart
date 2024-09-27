@@ -1,3 +1,4 @@
+import 'package:dusbuddy2/Pages/SavedResultsPage.dart';
 import 'package:flutter/material.dart';
 
 class KisiselPageBody extends StatelessWidget {
@@ -73,11 +74,14 @@ class KisiselPageBody extends StatelessWidget {
 
 
             InkWell(
-                onTap: (){},
+                onTap: (){Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SavedResultsPage()),
+                );},
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Ink.image(image: NetworkImage('assets/progress.png'),
+                    Ink.image(image: const NetworkImage('assets/results.png'),
                       height: 200,
                       width: 200,
                     ),
