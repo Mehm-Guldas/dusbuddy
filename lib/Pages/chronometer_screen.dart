@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:dusbuddy2/Database/sqflite_kronometre.dart';
 import 'package:flutter/material.dart';
-import '../Database/sqflite_kronometre.dart';
 import 'package:intl/intl.dart'; // Tarih formatlama için
+import 'dart:math'; // Daire çizerken radianlar kullanacağız
 
 class ChronometerScreen extends StatefulWidget {
   const ChronometerScreen({Key? key}) : super(key: key);
@@ -17,29 +17,31 @@ class _ChronometerScreenState extends State<ChronometerScreen> {
   Duration _duration = Duration();
   late String _formattedTime;
   TextEditingController _nameController = TextEditingController();
-  List<Map<String, dynamic>> _chronometerList = []; // Kayıtları saklamak için
-  late Timer _timer; // Zamanlayıcı ekledik
+  List<Map<String, dynamic>> _chronometerList = [];
+  Timer? _timer; // Zamanlayıcı nullable olabilir
+  double _progress = 0.0;
 
   @override
   void initState() {
     super.initState();
     db = ChronometerDatabase();
     db.openDb().then((_) {
-      _loadChronometers(); // Veritabanından kayıtları yükle
+      _loadChronometers();
     });
     _formattedTime = _formatTime(_duration);
   }
 
-  // Veritabanından kronometre kayıtlarını yükleme
   Future<void> _loadChronometers() async {
-    List<Map<String, dynamic>> chronometers = await db.getChronometers();
-    print("Yüklenen veriler: $chronometers");  // Konsolda yazdır
-    setState(() {
-      _chronometerList = chronometers;  // Veritabanından gelen verileri listeye ekle
-    });
+    try {
+      List<Map<String, dynamic>> chronometers = await db.getChronometers();
+      setState(() {
+        _chronometerList = chronometers;
+      });
+    } catch (e) {
+      print("Veritabanı hatası: $e");
+    }
   }
 
-  // Zamanı formatlama
   String _formatTime(Duration duration) {
     String twoDigits(int n) => n.toString().padLeft(2, '0');
     String twoDigitMinutes = twoDigits(duration.inMinutes.remainder(60));
@@ -47,7 +49,6 @@ class _ChronometerScreenState extends State<ChronometerScreen> {
     return "${twoDigits(duration.inHours)}:$twoDigitMinutes:$twoDigitSeconds";
   }
 
-  // Kronometreyi başlatma
   void _startStopwatch() {
     setState(() {
       _stopwatch.start();
@@ -55,49 +56,49 @@ class _ChronometerScreenState extends State<ChronometerScreen> {
         setState(() {
           _duration = _stopwatch.elapsed;
           _formattedTime = _formatTime(_duration);
+          _progress = (_duration.inSeconds % 60) / 60.0;
         });
       });
     });
   }
 
-  // Kronometreyi durdurma
   void _stopStopwatch() {
     setState(() {
       _stopwatch.stop();
-      _timer.cancel(); // Zamanlayıcıyı durdur
+      _timer?.cancel(); // Zamanlayıcı null kontrolü
     });
   }
 
-  // Kronometreyi sıfırlama
   void _resetStopwatch() {
     setState(() {
       _stopwatch.reset();
       _duration = Duration();
       _formattedTime = _formatTime(_duration);
-      _nameController.clear(); // Adı temizle
+      _nameController.clear();
+      _progress = 0.0;
     });
   }
 
-  // Süreyi veritabanına kaydetme
   Future<void> _saveChronometer() async {
     try {
       String name = _nameController.text;
       String date = DateFormat('yyyy-MM-dd – kk:mm').format(DateTime.now());
 
       await db.insertChronometer(name, _duration.inSeconds, date);
-      await _loadChronometers(); // Veriyi güncelledikten sonra ekrana yansıtmak için listeyi yükle
+      await _loadChronometers();
 
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text("Kronometre kaydedildi!")),
       );
     } catch (e) {
-      print("Hata oluştu: $e"); // Hata mesajını konsola yazdır
+      print("Hata oluştu: $e");
     }
   }
 
   @override
   void dispose() {
-    _timer.cancel(); // Timer'ı temizle
+    _timer?.cancel(); // Timer'ı temizle ve null kontrolü
+    _stopwatch.stop(); // Stopwatch'ı durdur
     super.dispose();
   }
 
@@ -106,13 +107,28 @@ class _ChronometerScreenState extends State<ChronometerScreen> {
     return Scaffold(
       appBar: AppBar(title: Text('Kronometre')),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              'Süre: $_formattedTime',
-              style: TextStyle(fontSize: 48.0, fontWeight: FontWeight.bold),
+              'Süre:',
+              style: TextStyle(fontSize: 40.0, fontWeight: FontWeight.bold),
+            ),
+            CustomPaint(
+              painter: CircularBorderPainter(_progress),
+              child: Container(
+                width: 150,
+                height: 150,
+                alignment: Alignment.center,
+                child: Text(
+                  '$_formattedTime',
+                  style: TextStyle(
+                    fontSize: 30.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
             ),
             SizedBox(height: 20),
             TextField(
@@ -126,29 +142,52 @@ class _ChronometerScreenState extends State<ChronometerScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ElevatedButton(
+                OutlinedButton.icon(
                   onPressed: _startStopwatch,
-                  child: Text('Başlat'),
+                  icon: Icon(Icons.play_arrow),
+                  label: Text('Başlat'),
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: Colors.green, // primary yerine foregroundColor kullanılıyor
+                    side: BorderSide(color: Colors.green),
+                    padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                  ),
                 ),
                 SizedBox(width: 20),
-                ElevatedButton(
+                OutlinedButton.icon(
                   onPressed: _stopStopwatch,
-                  child: Text('Durdur'),
+                  icon: Icon(Icons.pause),
+                  label: Text('Durdur'),
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: Colors.orange, // primary yerine foregroundColor
+                    side: BorderSide(color: Colors.orange),
+                    padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                  ),
                 ),
                 SizedBox(width: 20),
-                ElevatedButton(
+                OutlinedButton.icon(
                   onPressed: _resetStopwatch,
-                  child: Text('Sıfırla'),
+                  icon: Icon(Icons.refresh),
+                  label: Text('Sıfırla'),
+                  style: OutlinedButton.styleFrom(
+                    foregroundColor: Colors.red, // primary yerine foregroundColor
+                    side: BorderSide(color: Colors.red),
+                    padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                  ),
                 ),
               ],
             ),
             SizedBox(height: 20),
-            ElevatedButton(
+            OutlinedButton.icon(
               onPressed: _saveChronometer,
-              child: Text('Kaydet'),
+              icon: Icon(Icons.save),
+              label: Text('Kaydet'),
+              style: OutlinedButton.styleFrom(
+                foregroundColor: Colors.blue, // primary yerine foregroundColor
+                side: BorderSide(color: Colors.blue),
+                padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+              ),
             ),
             SizedBox(height: 20),
-            // Kayıtları gösteren liste
             Expanded(
               child: _chronometerList.isEmpty
                   ? Center(child: Text('Kayıtlı veri bulunmuyor'))
@@ -161,7 +200,8 @@ class _ChronometerScreenState extends State<ChronometerScreen> {
                     child: ListTile(
                       title: Text(chronometer['name']),
                       subtitle: Text(
-                          'Süre: ${_formatTime(Duration(seconds: chronometer['duration']))} - ${chronometer['date']}'),
+                        'Süre: ${_formatTime(Duration(seconds: chronometer['duration']))} - ${chronometer['date']}',
+                      ),
                     ),
                   );
                 },
@@ -171,5 +211,43 @@ class _ChronometerScreenState extends State<ChronometerScreen> {
         ),
       ),
     );
+  }
+}
+
+class CircularBorderPainter extends CustomPainter {
+  final double progress;
+
+  CircularBorderPainter(this.progress);
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final Paint basePaint = Paint()
+      ..color = Colors.grey
+      ..strokeWidth = 2
+      ..style = PaintingStyle.stroke;
+
+    final Paint progressPaint = Paint()
+      ..color = Color.fromARGB(255, 0, 255, 51)
+      ..strokeWidth = 5
+      ..style = PaintingStyle.stroke
+      ..strokeCap = StrokeCap.round;
+
+    final double radius = size.width / 2;
+    final double sweepAngle = 2 * pi * progress;
+    final Offset center = Offset(size.width / 2, size.height / 2);
+
+    canvas.drawCircle(center, radius, basePaint);
+    canvas.drawArc(
+      Rect.fromCircle(center: center, radius: radius),
+      -pi / 2,
+      sweepAngle,
+      false,
+      progressPaint,
+    );
+  }
+
+  @override
+  bool shouldRepaint(CircularBorderPainter oldDelegate) {
+    return oldDelegate.progress != progress;
   }
 }
