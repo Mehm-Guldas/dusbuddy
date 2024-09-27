@@ -18,6 +18,7 @@ class _HomeState extends State<Home> {
   final screens = [
     //First Body Takvim Page <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     ChronometerScreen(),
+
     //Second Body Kisisel Page <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
     KisiselPageBody(),
 
