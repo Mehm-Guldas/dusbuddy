@@ -1,3 +1,4 @@
+import 'package:dusbuddy2/Pages/ProgressPage.dart';
 import 'package:dusbuddy2/Pages/SavedResultsPage.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +18,10 @@ class KisiselPageBody extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             InkWell(
-                onTap: (){},
+                onTap: (){Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ProgressPage()),
+                );},
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [

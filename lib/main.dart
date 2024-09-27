@@ -1,3 +1,4 @@
+import 'package:dusbuddy2/Pages/ProgressPage.dart';
 import 'package:dusbuddy2/Pages/SavedResultsPage.dart';
 import 'package:dusbuddy2/Pages/examinfo.dart';
 import 'package:dusbuddy2/Pages/settings.dart';
@@ -12,7 +13,8 @@ void main() => runApp(MaterialApp(
     '/about': (context) => About(),
     '/settings': (context) => Settings(),
     '/examinfo': (context) => Examinfo(),
-    '/resultspage': (context) => SavedResultsPage()
+    '/resultspage': (context) => SavedResultsPage(),
+    '/progresspage': (context) => ProgressPage()
   },
 ));
 
