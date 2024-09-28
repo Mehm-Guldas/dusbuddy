@@ -194,13 +194,28 @@ class _ChronometerScreenState extends State<ChronometerScreen> {
                   : ListView.builder(
                 itemCount: _chronometerList.length,
                 itemBuilder: (context, index) {
-                  final chronometer = _chronometerList[index];
+                  final chronometer = _chronometerList.reversed.toList()[index];
                   return Card(
                     margin: EdgeInsets.symmetric(vertical: 8.0),
                     child: ListTile(
                       title: Text(chronometer['name']),
                       subtitle: Text(
                         'Süre: ${_formatTime(Duration(seconds: chronometer['duration']))} - ${chronometer['date']}',
+                      ),
+                      trailing: TextButton(
+                        onPressed: () async {
+                          // Veritabanından silme işlemi
+                          await db.deleteChronometer(chronometer['id']);
+
+                          // Silme işleminden sonra listeyi yeniden yükleme
+                          await _loadChronometers();
+
+                          // Kullanıcıya bildirim göster
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text("${chronometer['name']} silindi!")),
+                          );
+                        },
+                        child: Icon(Icons.delete_forever),
                       ),
                     ),
                   );
