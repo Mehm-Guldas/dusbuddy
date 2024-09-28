@@ -31,5 +31,14 @@ class ChronometerDatabase {
     print("Veritabanından çekilen veriler: $chronometers");  // Verileri konsolda yazdır
     return chronometers;
   }
+// Kronometre verisini silme
+  Future<void> deleteChronometer(int id) async {
+    await _database?.delete(
+      'chronometers',
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+
+}
 
 }
