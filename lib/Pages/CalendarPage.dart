@@ -29,7 +29,7 @@ class _CalendarPageState extends State<CalendarPage> {
 
     // Çekilen veriler arasında sadece seçilen günle eşleşen verileri filtreliyoruz
     setState(() {
-      _chronometers = data.where((item) => item['date'].startsWith(formattedDate)).toList();
+      _chronometers = data.where((item) => item['date'].startsWith(formattedDate)).toList().reversed.toList();
     });
   }
 
