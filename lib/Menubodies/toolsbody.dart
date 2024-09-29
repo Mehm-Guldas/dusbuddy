@@ -27,7 +27,7 @@ class AraclarPageBody extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Ink.image(
-                    image: const NetworkImage('assets/clipboard.png'),
+                    image: const AssetImage('assets/clipboard.png'),
                     height: 200,
                     width: 200,
                   ),
@@ -51,7 +51,7 @@ class AraclarPageBody extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Ink.image(
-                    image: const NetworkImage('assets/schedule.png'),
+                    image: const AssetImage('assets/schedule.png'),
                     height: 200,
                     width: 200,
                   ),
@@ -74,7 +74,7 @@ class AraclarPageBody extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Ink.image(
-                    image: const NetworkImage('assets/newspaper.png'),
+                    image: const AssetImage('assets/newspaper.png'),
                     height: 200,
                     width: 200,
                   ),
@@ -92,7 +92,7 @@ class AraclarPageBody extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Ink.image(
-                    image: const NetworkImage('assets/progress.png'),
+                    image: const AssetImage('assets/progress.png'),
                     height: 200,
                     width: 200,
                   ),
