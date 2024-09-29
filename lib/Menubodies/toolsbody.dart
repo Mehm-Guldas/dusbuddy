@@ -82,7 +82,7 @@ class AraclarPageBody extends StatelessWidget {
                   ),
                   const SizedBox(height: 6),
                   Text(
-                    'Haberler',
+                    'Net Hesaplama',
                     style: TextStyle(fontSize: 24, color: Theme.of(context).colorScheme.onPrimaryContainer),
                   ),
                 ],
