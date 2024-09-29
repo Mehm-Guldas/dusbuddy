@@ -25,7 +25,7 @@ class KisiselPageBody extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Ink.image(image: NetworkImage('assets/books.png'),
+                    Ink.image(image: AssetImage('assets/books.png'),
                       height: 200,
                       width: 200,
                     ),
@@ -43,7 +43,7 @@ class KisiselPageBody extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Ink.image(image: NetworkImage('assets/progress.png'),
+                    Ink.image(image: AssetImage('assets/progress.png'),
                       height: 200,
                       width: 200,
                     ),
@@ -64,7 +64,7 @@ class KisiselPageBody extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Ink.image(image: NetworkImage('assets/books.png'),
+                    Ink.image(image: AssetImage('assets/books.png'),
                       height: 200,
                       width: 200,
                     ),
@@ -85,7 +85,7 @@ class KisiselPageBody extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Ink.image(image: const NetworkImage('assets/results.png'),
+                    Ink.image(image: const AssetImage('assets/results.png'),
                       height: 200,
                       width: 200,
                     ),
