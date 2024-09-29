@@ -32,9 +32,9 @@ class AraclarPageBody extends StatelessWidget {
                     width: 200,
                   ),
                   const SizedBox(height: 6),
-                  const Text(
+                  Text(
                     'Net Hesaplama',
-                    style: TextStyle(fontSize: 24, color: Colors.black87),
+                    style: TextStyle(fontSize: 24, color: Theme.of(context).colorScheme.onPrimaryContainer),
                   ),
                 ],
               ),
@@ -56,9 +56,9 @@ class AraclarPageBody extends StatelessWidget {
                     width: 200,
                   ),
                   const SizedBox(height: 6),
-                  const Text(
+                  Text(
                     'Takvim',
-                    style: TextStyle(fontSize: 24, color: Colors.black87),
+                    style: TextStyle(fontSize: 24, color: Theme.of(context).colorScheme.onPrimaryContainer),
                   ),
                 ],
               ),
@@ -79,9 +79,9 @@ class AraclarPageBody extends StatelessWidget {
                     width: 200,
                   ),
                   const SizedBox(height: 6),
-                  const Text(
+                   Text(
                     'Haberler',
-                    style: TextStyle(fontSize: 24, color: Colors.black87),
+                    style: TextStyle(fontSize: 24, color: Theme.of(context).colorScheme.onPrimaryContainer),
                   ),
                 ],
               ),
@@ -97,9 +97,9 @@ class AraclarPageBody extends StatelessWidget {
                     width: 200,
                   ),
                   const SizedBox(height: 6),
-                  const Text(
+                  Text(
                     'Haberler',
-                    style: TextStyle(fontSize: 24, color: Colors.black87),
+                    style: TextStyle(fontSize: 24, color: Theme.of(context).colorScheme.onPrimaryContainer),
                   ),
                 ],
               ),

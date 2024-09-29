@@ -30,8 +30,8 @@ class KisiselPageBody extends StatelessWidget {
                       width: 200,
                     ),
                     SizedBox(height: 6,),
-                    const Text('Konu Ilerleme',
-                      style: TextStyle(fontSize: 24, color: Colors.black87),
+                    Text('Konu Ilerleme',
+                      style: TextStyle(fontSize: 24, color: Theme.of(context).colorScheme.onPrimaryContainer),
                     )
                   ],
                 )
@@ -48,8 +48,8 @@ class KisiselPageBody extends StatelessWidget {
                       width: 200,
                     ),
                     SizedBox(height: 6,),
-                    const Text('Genel Ilerleme',
-                      style: TextStyle(fontSize: 24, color: Colors.black87),
+                    Text('Genel Ilerleme',
+                      style: TextStyle(fontSize: 24, color: Theme.of(context).colorScheme.onPrimaryContainer),
                     )
                   ],
                 )
@@ -69,8 +69,8 @@ class KisiselPageBody extends StatelessWidget {
                       width: 200,
                     ),
                     SizedBox(height: 6,),
-                    const Text('Denemelerim',
-                      style: TextStyle(fontSize: 24, color: Colors.black87),
+                    Text('Denemelerim',
+                      style: TextStyle(fontSize: 24, color: Theme.of(context).colorScheme.onPrimaryContainer),
                     )
                   ],
                 )
@@ -90,8 +90,8 @@ class KisiselPageBody extends StatelessWidget {
                       width: 200,
                     ),
                     SizedBox(height: 6,),
-                    const Text('Sonuçlarım',
-                      style: TextStyle(fontSize: 24, color: Colors.black87),
+                    Text('Sonuçlarım',
+                      style: TextStyle(fontSize: 24, color: Theme.of(context).colorScheme.onPrimaryContainer),
                     )
                   ],
                 )
