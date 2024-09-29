@@ -1,6 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.dusbuddy2">
-   <application
+
+
+    <application
         android:label="dusbuddy2"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
